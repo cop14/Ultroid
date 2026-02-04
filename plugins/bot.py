@@ -84,7 +84,8 @@ The Ultroid Userbot
   ◍ Telethon - {}
 """
 
-in_alive = "{}\n\n🌀 <b>Ultroid Version -><b> <code>{}</code>\n🌀 <b>PyUltroid -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Uptime -></b> <code>{}</code>\n🌀 <b>Branch -></b>[ {} ]\n\n• <b>Join @TeamUltroid</b>"
+# Modificado: Se eliminó el placeholder de Branch
+in_alive = "{}\n\n🌀 <b>Ultroid Version -><b> <code>{}</code>\n🌀 <b>PyUltroid -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Uptime -></b> <code>{}</code>\n\n• <b>Join @TeamUltroid</b>"
 
 
 @callback("alive")
@@ -113,12 +114,10 @@ async def lol(ult):
         pic = choice(pic)
     uptime = time_formatter((time.time() - start_time) * 1000)
     header = udB.get_key("ALIVE_TEXT") or get_string("bot_1")
-    y = Repo().active_branch
-    xx = Repo().remotes[0].config_reader.get("url")
-    rep = xx.replace(".git", f"/tree/{y}")
-    kk = f" `[{y}]({rep})` "
+    
+    # BLOQUE ELIMINADO: Llamadas a Git (Repo, branch, url, kk) borradas para optimización.
+    
     if inline:
-        kk = f"<a href={rep}>{y}</a>"
         parse = "html"
         als = in_alive.format(
             header,
@@ -126,13 +125,15 @@ async def lol(ult):
             UltVer,
             pyver(),
             uptime,
-            kk,
+            # kk eliminado
+            # Muy eliminado
         )
 
         if _e := udB.get_key("ALIVE_EMOJI"):
             als = als.replace("🌀", _e)
     else:
         parse = "md"
+        # kk eliminado de los argumentos
         als = (get_string("alive_1")).format(
             header,
             OWNER_NAME,
@@ -141,7 +142,6 @@ async def lol(ult):
             uptime,
             pyver(),
             __version__,
-            kk,
         )
 
         if a := udB.get_key("ALIVE_EMOJI"):
